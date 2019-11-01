@@ -25,7 +25,8 @@ const propTypes = {
       route: PropTypes.string.isRequired,
       icon: PropTypes.element,
     })
-  )
+  ),
+  headerTitle: PropTypes.string,
 };
 
 const styles = (theme) => ({
@@ -36,8 +37,8 @@ const styles = (theme) => ({
     height: '100%',
     width: '100%',
     background: `url(${Logo})`,
-    backgroundSize: 'cover', // might want to switch to contain once we get an actual image
-    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'contain', // might want to switch to contain once we get an actual image
+    backgroundRepeat: 'repeat',
   },
   drawerList: {
     width: DRAWER_WIDTH,
@@ -52,7 +53,7 @@ const styles = (theme) => ({
   },
 });
 
-const PageLayout = ({ classes, drawerOptions, children }) => {
+const PageLayout = ({ classes, drawerOptions, children, headerTitle }) => {
   const [isOpen, setIsOpen] = React.useState(true);
 
   const toggleDrawer = event => {
@@ -67,7 +68,7 @@ const PageLayout = ({ classes, drawerOptions, children }) => {
     <>
       <ThemeProvider theme={customTheme}>
         <CssBaseline />
-        <SiteHeader title="Game Development Club" className={classes.appHeader}>
+        <SiteHeader title={headerTitle} className={classes.appHeader}>
           {children}
         </SiteHeader>
         <Hidden smDown>

@@ -1,12 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PageLayout from './components/pageLayout/PageLayout';
 import Routes, { routeConfig } from './Routes';
 
-function App() {
+App.propTypes = {
+  pageTitle: PropTypes.string,
+};
+
+function App({ pageTitle }) {
   return (
     <BrowserRouter>
-      <PageLayout drawerOptions={routeConfig}>
+      <PageLayout headerTitle={pageTitle} drawerOptions={routeConfig}>
         <Routes />
       </PageLayout>
     </BrowserRouter>
@@ -14,4 +20,8 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  pageTitle: state.currentPageTitle
+});
+
+export default connect(mapStateToProps)(App);

@@ -57,6 +57,10 @@ const SiteHeader = ({ classes, title, children }) => (
   </React.Fragment>
 )
 
+SiteHeader.defaultProps = {
+  title: "",
+};
+
 SiteHeader.propTypes = propTypes;
 
 export default withStyles(styles)(SiteHeader);
