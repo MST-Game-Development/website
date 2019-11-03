@@ -37,7 +37,7 @@ const styles = (theme) => ({
     height: '100%',
     width: '100%',
     background: `url(${Logo})`,
-    backgroundSize: 'contain', // might want to switch to contain once we get an actual image
+    backgroundSize: 'contain',
     backgroundRepeat: 'repeat',
   },
   drawerList: {
@@ -50,6 +50,8 @@ const styles = (theme) => ({
     [theme.breakpoints.up('md')]: {
       paddingLeft: DRAWER_WIDTH,
     },
+    marginLeft: '5rem',
+    marginRight: '5rem'
   },
 });
 
