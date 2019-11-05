@@ -2,7 +2,7 @@
 name: Task
 about: Break down features into smaller tasks.
 title: DEVTASK - summary
-labels: dev-task
+labels: dev task
 assignees: ''
 
 ---
