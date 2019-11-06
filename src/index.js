@@ -13,11 +13,9 @@ const store = createStore(
 )
 
 ReactDOM.render(
-  <div style={{ height: '100vh' }}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </div>,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 );
 
