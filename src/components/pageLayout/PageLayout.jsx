@@ -51,7 +51,8 @@ const styles = (theme) => ({
       paddingLeft: DRAWER_WIDTH,
     },
     marginLeft: '5rem',
-    marginRight: '5rem'
+    marginRight: '5rem',
+    height: '75vh'
   },
 });
 
@@ -67,44 +68,42 @@ const PageLayout = ({ classes, drawerOptions, children, headerTitle }) => {
   };
 
   return (
-    <>
-      <ThemeProvider theme={customTheme}>
-        <CssBaseline />
-        <SiteHeader title={headerTitle} className={classes.appHeader}>
-          {children}
-        </SiteHeader>
-        <Hidden smDown>
-          <SwipeableDrawer
-            variant='permanent'
-            open={isOpen}
-            onClose={toggleDrawer}
-            onOpen={toggleDrawer}
-            anchor="left"
-            color="primary"
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            <Box className={classes.toolbar}>
-              <Box className={classes.logo} />
-            </Box>
-            <Divider />
-            <List component="nav" className={classes.drawerList}>
-              {drawerOptions.map(option => (
-                <MenuItem button key={option.key} component={Link} to={option.route}>
-                  {option.icon ? <ListItemIcon>{option.icon}</ListItemIcon> : <span />}
-                  <ListItemText primary={option.display} />
-                </MenuItem>
-              ))}
-            </List>
-          </SwipeableDrawer>
-        </Hidden>
-        <main className={classes.content}>
-          <Box className={classes.toolbar} />
-          {children}
-        </main>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={customTheme}>
+      <CssBaseline />
+      <SiteHeader title={headerTitle} className={classes.appHeader}>
+        {children}
+      </SiteHeader>
+      <Hidden smDown>
+        <SwipeableDrawer
+          variant='permanent'
+          open={isOpen}
+          onClose={toggleDrawer}
+          onOpen={toggleDrawer}
+          anchor="left"
+          color="primary"
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+        >
+          <Box className={classes.toolbar}>
+            <Box className={classes.logo} />
+          </Box>
+          <Divider />
+          <List component="nav" className={classes.drawerList}>
+            {drawerOptions.map(option => (
+              <MenuItem button key={option.key} component={Link} to={option.route}>
+                {option.icon ? <ListItemIcon>{option.icon}</ListItemIcon> : <span />}
+                <ListItemText primary={option.display} />
+              </MenuItem>
+            ))}
+          </List>
+        </SwipeableDrawer>
+      </Hidden>
+      <main className={classes.content}>
+        <Box className={classes.toolbar} />
+        {children}
+      </main>
+    </ThemeProvider>
   );
 };
 

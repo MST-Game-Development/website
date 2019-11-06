@@ -6,41 +6,52 @@ import Typography from '@material-ui/core/Typography';
 
 import ContentCard from '../components/contentCard/ContentCard';
 import { UPDATE_CURRENT_PAGE_TITLE } from '../store/constants';
+import NotFound from './errors/notFound';
 
 const propTypes = {
   setHeaderTitle: PropTypes.func.isRequired,
+  leadershipData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
 };
 
-const LeadershipPage = ({ setHeaderTitle }) => {
+const PAGE_TITLE = 'Leadership';
+
+const LeadershipPage = ({ setHeaderTitle, leadershipData }) => {
+  let renderContent;
+
   React.useEffect(() => {
-    setHeaderTitle('Leadership')
+    setHeaderTitle(PAGE_TITLE)
   }, [setHeaderTitle]);
 
-  let items = [];
-
-  for (let i = 0; i < 5; i++) {
-    items.push(i);
+  if (leadershipData.length) {
+    renderContent = (
+      <Grid container spacing={5}>
+        {
+          leadershipData.map(data => (
+            <Grid key={data.key} item xs={4}>
+              <ContentCard
+                header={data.name}
+                subheader={data.position}
+                mainContent={(
+                  <Typography variant="body2" color="textSecondary" component="p">
+                    {data.bio}
+                  </Typography>
+                )}
+              />
+            </Grid>
+          ))
+        }
+      </Grid>
+    )
+  }
+  else {
+    renderContent = <NotFound resource={PAGE_TITLE} />
   }
 
-  return (
-    <Grid container spacing={5}>
-      {
-        items.map(itemKey => (
-          <Grid key={itemKey} item xs={4}>
-            <ContentCard
-              header="Test Card"
-              subheader="Andrew Givens"
-              mainContent={(
-                <Typography variant="body2" color="textSecondary" component="p">
-                  This is a test card to test the cards ability to card correctly. Hopefully it cards in the right card way.
-                </Typography>
-              )}
-            />
-          </Grid>
-        ))
-      }
-    </Grid>
-  );
+  return renderContent;
+};
+
+LeadershipPage.defaultProps = {
+  leadershipData: []
 };
 
 LeadershipPage.propTypes = propTypes;

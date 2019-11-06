@@ -20,6 +20,7 @@ import Placeholder from '../../assets/placeholder.png';
 const propTypes = {
   classes: PropTypes.object.isRequired,
   expandable: PropTypes.bool.isRequired,
+  shareable: PropTypes.bool.isRequired,
   menuOptions: PropTypes.arrayOf(PropTypes.shape({
     Display: PropTypes.string.isRequired
   })).isRequired,
@@ -52,6 +53,7 @@ const styles = theme => ({
 const ContentCard = ({
   classes,
   expandable,
+  shareable,
   menuOptions,
   header,
   subheader,
@@ -92,9 +94,15 @@ const ContentCard = ({
           {mainContent}
         </CardContent>
         <CardActions>
-          <IconButton aria-label="share">
-            <ShareIcon />
-          </IconButton>
+          {
+            shareable
+              ? (
+                  <IconButton aria-label="share">
+                    <ShareIcon />
+                  </IconButton>
+                )
+              : <span />
+          }
           {
             expandable
               ? (
@@ -136,6 +144,7 @@ const ContentCard = ({
 
 ContentCard.defaultProps = {
   expandable: false,
+  shareable: false,
   menuOptions: [],
   subheader: '',
   displayMedia: false,
