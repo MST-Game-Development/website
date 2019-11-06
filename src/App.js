@@ -16,7 +16,6 @@ function App({ pageTitle }) {
         <Routes />
       </PageLayout>
     </BrowserRouter>
-    
   );
 }
 
