@@ -14,6 +14,7 @@ import SchedulePage from './pages/SchedulePage';
 import GamesPage from './pages/GamesPage';
 import OpenProjectsPage from './pages/OpenProjectsPage';
 import LeadershipPage from './pages/LeadershipPage';
+import NotFound from './pages/errors/notFound';
 
 export const routeConfig = [
   {
@@ -67,6 +68,7 @@ const Routes = () => (
           <Route key={config.key} exact path={config.route} component={config.component} />
         ))
       }
+      <Route component={NotFound} />
     </Switch>
   </content>
 );
