@@ -1,3 +1,4 @@
 export default {
-  currentPageTitle: ''
+  currentPageTitle: '',
+  leadershipData: []
 };

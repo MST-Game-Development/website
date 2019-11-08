@@ -6,21 +6,35 @@ import Typography from '@material-ui/core/Typography';
 
 import ContentCard from '../components/contentCard/ContentCard';
 import { UPDATE_CURRENT_PAGE_TITLE } from '../store/constants';
+import { getLeadershipData } from '../store/actions';
 import NotFound from './errors/notFound';
 
 const propTypes = {
   setHeaderTitle: PropTypes.func.isRequired,
-  leadershipData: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  leadershipData: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      position: PropTypes.oneOf(
+        ["President", "Vice President", "Treasurer", "Secretary", "Public Relations", "Mechanical Lead", "Website Manager"]
+      ).isRequired,
+      bio: PropTypes.string.isRequired,
+    }
+  )).isRequired,
+  fetchLeadershipData: PropTypes.func.isRequired,
 };
 
 const PAGE_TITLE = 'Leadership';
 
-const LeadershipPage = ({ setHeaderTitle, leadershipData }) => {
+const LeadershipPage = ({ setHeaderTitle, leadershipData, fetchLeadershipData }) => {
   let renderContent;
 
   React.useEffect(() => {
     setHeaderTitle(PAGE_TITLE)
-  }, [setHeaderTitle]);
+
+    if(!leadershipData.length) {
+      fetchLeadershipData();
+    }
+  }, [setHeaderTitle, fetchLeadershipData, leadershipData]);
 
   if (leadershipData.length) {
     renderContent = (
@@ -56,8 +70,13 @@ LeadershipPage.defaultProps = {
 
 LeadershipPage.propTypes = propTypes;
 
-const mapDispatchToProps = dispatch => ({
-  setHeaderTitle: title => dispatch({ type: UPDATE_CURRENT_PAGE_TITLE, currentPageTitle: title })
+const mapStateToProps = state => ({
+  leadershipData: state.leadershipData
 });
 
-export default connect(undefined, mapDispatchToProps)(LeadershipPage);
+const mapDispatchToProps = dispatch => ({
+  setHeaderTitle: title => dispatch({ type: UPDATE_CURRENT_PAGE_TITLE, currentPageTitle: title }),
+  fetchLeadershipData: () => getLeadershipData(dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LeadershipPage);
