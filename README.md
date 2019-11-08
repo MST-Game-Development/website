@@ -43,6 +43,16 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
+## Participating on Github
+
+### Creating Issues
+
+Creating an Issue will let the rest of the team about something that needs to be implemented or about something that is wrong. To make one, navigate to [Here](https://github.com/MST-Game-Development/website/issues/new/choose), and choose New Issue. Choose a template and fill it out.
+
+### Creating A Pull Request
+
+When you want to merge code from your branch into the master branch, you need to create a Pull Request. Select the Pull Request tab, and hit New Pull Request. After filling out the template, you must wait for a code review before merging to master.
+
 ### Code Splitting
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
