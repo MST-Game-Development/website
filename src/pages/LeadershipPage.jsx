@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import ContentCard from '../components/contentCard/ContentCard';
 import { UPDATE_CURRENT_PAGE_TITLE } from '../store/constants';
@@ -26,6 +27,8 @@ const propTypes = {
 const PAGE_TITLE = 'Leadership';
 
 const LeadershipPage = ({ setHeaderTitle, leadershipData, fetchLeadershipData }) => {
+  const [isLoading, setIsLoading] = React.useState(true);
+
   let renderContent;
 
   React.useEffect(() => {
@@ -33,10 +36,15 @@ const LeadershipPage = ({ setHeaderTitle, leadershipData, fetchLeadershipData })
 
     if(!leadershipData.length) {
       fetchLeadershipData();
+    } else {
+      setIsLoading(false);
     }
-  }, [setHeaderTitle, fetchLeadershipData, leadershipData]);
+  }, [setHeaderTitle, fetchLeadershipData, leadershipData, setIsLoading]);
 
-  if (leadershipData.length) {
+  if (isLoading) {
+    renderContent = <LinearProgress color="secondary" />
+  }
+  else if (leadershipData.length) {
     renderContent = (
       <Grid container spacing={5}>
         {
