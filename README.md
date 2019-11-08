@@ -1,25 +1,41 @@
+# Missouri University of Science and Technology Game Dev Club Website
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+### Prerequisites
+- [Node JS](https://nodejs.org/en/)
+- [yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
 
-### `yarn start`
+#### 1. Clone the Repo and create branch
+```
+git clone https://github.com/MST-Game-Development/website.git
+cd website
+git checkout -b my-branch
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### 2. Install dependencies
+```
+yarn install
+```
+
+#### 3. Start local Server
+```
+yarn start
+```
+Navigate to [http://localhost:3000](http://localhost:3000)
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn deploy`
+## Deployments
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Production deployments will be trigger automatically on a push to the master branch with [AWS Amplify](https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html).
 
-The build is minified and the filenames include the hashes.<br />
+Pull Request preview deployments will be triggered automatically on every PR to master. The AWS Amplify PR check will pass once the deployment is successful, and you'll be able to view the deployment in the check summary.
 
-The build is then deployed to https://mst-game-development.github.io/website/
+![PRdeployment](https://user-images.githubusercontent.com/15256633/68488157-11378080-020a-11ea-85e5-255ab5f77585.gif)
 
 ## Learn More
 
