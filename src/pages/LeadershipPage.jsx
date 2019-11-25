@@ -54,7 +54,7 @@ const LeadershipPage = ({ setHeaderTitle, leadershipData, fetchLeadershipData })
                 header={data.name}
                 subheader={data.position}
                 mainContent={(
-                  <Typography variant="body2" color="textSecondary" component="p">
+                  <Typography variant="body2" color="textSecondary" component="p" style={{ whiteSpace: "pre-wrap" }}>
                     {data.bio}
                   </Typography>
                 )}
