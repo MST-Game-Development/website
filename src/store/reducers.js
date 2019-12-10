@@ -13,6 +13,10 @@ const reducer = (state = initialState, action) => {
       newState.leadershipData = action.leadershipData;
       break;
 
+    case constants.UPDATE_LEADERSHIP_API_ERROR:
+      newState.leadershipApiError = action.error;
+      break;
+
     default:
       break;
   }

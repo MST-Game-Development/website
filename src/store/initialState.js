@@ -1,4 +1,5 @@
 export default {
   currentPageTitle: '',
-  leadershipData: []
+  leadershipData: [],
+  leadershipApiError: {}
 };

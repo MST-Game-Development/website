@@ -9,6 +9,7 @@ import ContentCard from '../components/contentCard/ContentCard';
 import { UPDATE_CURRENT_PAGE_TITLE } from '../store/constants';
 import { getLeadershipData } from '../store/actions';
 import NotFound from './errors/notFound';
+import Error from '../components/error/Error';
 
 const propTypes = {
   setHeaderTitle: PropTypes.func.isRequired,
@@ -21,27 +22,40 @@ const propTypes = {
       bio: PropTypes.string.isRequired,
     }
   )).isRequired,
+  leadershipError: PropTypes.shape({
+    status: PropTypes.number,
+    message: PropTypes.string
+  }).isRequired,
   fetchLeadershipData: PropTypes.func.isRequired,
 };
 
 const PAGE_TITLE = 'Leadership';
 
-const LeadershipPage = ({ setHeaderTitle, leadershipData, fetchLeadershipData }) => {
+const LeadershipPage = ({ setHeaderTitle, leadershipData, leadershipError, fetchLeadershipData }) => {
   const [isLoading, setIsLoading] = React.useState(true);
+  const [isFailed, setIsFailed] = React.useState(false);
 
   let renderContent;
 
   React.useEffect(() => {
-    setHeaderTitle(PAGE_TITLE)
+    setHeaderTitle(PAGE_TITLE);
+  }, [setHeaderTitle])
 
-    if(!leadershipData.length) {
+  React.useEffect(() => {
+    if(!leadershipData.length && !leadershipError.status) {
       fetchLeadershipData();
+    } else if(leadershipError.status) {
+      setIsFailed(true);
+      setIsLoading(false);
     } else {
       setIsLoading(false);
     }
-  }, [setHeaderTitle, fetchLeadershipData, leadershipData, setIsLoading]);
+  }, [setHeaderTitle, fetchLeadershipData, leadershipData, leadershipError, setIsLoading]);
 
-  if (isLoading) {
+  if (isFailed) {
+    renderContent = <Error status={leadershipError.status} message={leadershipError.message} />
+  }
+  else if (isLoading) {
     renderContent = <LinearProgress color="secondary" />
   }
   else if (leadershipData.length) {
@@ -79,7 +93,8 @@ LeadershipPage.defaultProps = {
 LeadershipPage.propTypes = propTypes;
 
 const mapStateToProps = state => ({
-  leadershipData: state.leadershipData
+  leadershipData: state.leadershipData,
+  leadershipError: state.leadershipApiError
 });
 
 const mapDispatchToProps = dispatch => ({
