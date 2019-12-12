@@ -72,7 +72,7 @@ const ContentCard = ({
 
   return (
     <React.Fragment>
-      <Card>
+      <Card raised>
         <CardHeader
           title={header}
           subheader={subheader}
