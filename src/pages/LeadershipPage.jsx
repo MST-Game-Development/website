@@ -60,10 +60,10 @@ const LeadershipPage = ({ setHeaderTitle, leadershipData, leadershipError, fetch
   }
   else if (leadershipData.length) {
     renderContent = (
-      <Grid container spacing={5}>
+      <Grid container spacing={5} alignContent='center'>
         {
           leadershipData.map(data => (
-            <Grid key={data.key} item xs={4}>
+            <Grid key={data.position} item xs={4} style={{ minWidth: '20em', maxWidth: '25em' }}>
               <ContentCard
                 header={data.name}
                 subheader={data.position}
