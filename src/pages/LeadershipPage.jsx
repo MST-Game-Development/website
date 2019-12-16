@@ -17,7 +17,7 @@ const propTypes = {
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       position: PropTypes.oneOf(
-        ["President", "Vice President", "Treasurer", "Secretary", "Public Relations", "Mechanical Lead", "Website Manager"]
+        ["President", "Vice President", "Treasurer", "Secretary", "Public Relations", "Arcade Technician", "Website Manager"]
       ).isRequired,
       bio: PropTypes.string.isRequired,
     }
@@ -60,7 +60,7 @@ const LeadershipPage = ({ setHeaderTitle, leadershipData, leadershipError, fetch
   }
   else if (leadershipData.length) {
     renderContent = (
-      <Grid container spacing={5} alignContent='center'>
+      <Grid container spacing={5} alignContent='center' justify="center">
         {
           leadershipData.map(data => (
             <Grid key={data.position} item xs={4} style={{ minWidth: '20em', maxWidth: '25em' }}>
