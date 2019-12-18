@@ -29,6 +29,8 @@ const propTypes = {
   headerTitle: PropTypes.string,
 };
 
+const styledBy = (property, mapping) => props => mapping[props[property]];
+
 const styles = (theme) => ({
   toolbar: {
     ...theme.mixins.toolbar,
@@ -46,18 +48,42 @@ const styles = (theme) => ({
   appHeader: {
     margin: DRAWER_WIDTH,
   },
-  content: {
-    [theme.breakpoints.up('md')]: {
-      paddingLeft: DRAWER_WIDTH,
+  content: styledBy('viewWidth', {
+    default: {
+      [theme.breakpoints.up('md')]: {
+        paddingLeft: DRAWER_WIDTH,
+      },
+      marginLeft: '5rem',
+      marginRight: '5rem',
+      height: '75vh'
     },
-    marginLeft: '5rem',
-    marginRight: '5rem',
-    height: '75vh'
-  },
+    mobile: {
+      [theme.breakpoints.up('md')]: {
+        paddingLeft: DRAWER_WIDTH,
+      },
+      height: '75vh'
+    }
+  })
 });
+
+const MainContent = withStyles(styles)(({ classes, viewWidth, children }) => (
+  <main className={classes.content}>
+    <Box className={classes.toolbar} />
+    {children}
+  </main>
+));
 
 const PageLayout = ({ classes, drawerOptions, children, headerTitle }) => {
   const [isOpen, setIsOpen] = React.useState(true);
+  const [viewSize, setViewSize] = React.useState('default');
+
+  React.useEffect(() => {
+    window.addEventListener('resize', () => {
+      window.innerWidth > 750
+        ? setViewSize('default')
+        : setViewSize('mobile')
+    })
+  }, [])
 
   const toggleDrawer = event => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -99,10 +125,9 @@ const PageLayout = ({ classes, drawerOptions, children, headerTitle }) => {
           </List>
         </SwipeableDrawer>
       </Hidden>
-      <main className={classes.content}>
-        <Box className={classes.toolbar} />
+      <MainContent viewWidth={viewSize}>
         {children}
-      </main>
+      </MainContent>
     </ThemeProvider>
   );
 };
