@@ -28,9 +28,10 @@ const ElevationScroll = ({ children }) => {
 const styles = (theme) => ({
   appBar: ({
     [theme.breakpoints.up('md')]: {
-      marginLeft: DRAWER_WIDTH,
+      // Remove left Margin
+      //marginLeft: DRAWER_WIDTH,
       [theme.breakpoints.up('sm')]: {
-        width: `calc(100% - ${DRAWER_WIDTH})`,
+        width: '100%',
       },
     },
   }),
