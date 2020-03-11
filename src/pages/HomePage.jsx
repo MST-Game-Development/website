@@ -7,12 +7,18 @@ const propTypes = {
   setHeaderTitle: PropTypes.func.isRequired,
 };
 
+function TestBox() {
+  return <div>Test Text</div>
+}
+
 const HomePage = ({ setHeaderTitle }) => {
   React.useEffect(() => {
     setHeaderTitle('Missouri S&T Game Development Club')
   }, [setHeaderTitle]);
 
-  return <div>Home</div>
+  return(
+    <TestBox/>
+  )
 };
 
 HomePage.propTypes = propTypes;
