@@ -51,7 +51,7 @@ const styles = (theme) => ({
   content: styledBy('viewWidth', {
     default: {
       [theme.breakpoints.up('md')]: {
-        paddingLeft: DRAWER_WIDTH,
+        // paddingLeft: DRAWER_WIDTH,
       },
       marginLeft: '5rem',
       marginRight: '5rem',
@@ -59,7 +59,7 @@ const styles = (theme) => ({
     },
     mobile: {
       [theme.breakpoints.up('md')]: {
-        paddingLeft: DRAWER_WIDTH,
+        // paddingLeft: DRAWER_WIDTH,
       },
       height: '75vh'
     }
@@ -99,8 +99,8 @@ const PageLayout = ({ classes, drawerOptions, children, headerTitle }) => {
       <SiteHeader title={headerTitle} className={classes.appHeader}>
         {children}
       </SiteHeader>
-      <Hidden smDown>
-        <SwipeableDrawer
+      {/* <Hidden smDown>
+        { <SwipeableDrawer
           variant='permanent'
           open={isOpen}
           onClose={toggleDrawer}
@@ -115,16 +115,16 @@ const PageLayout = ({ classes, drawerOptions, children, headerTitle }) => {
             <Box className={classes.logo} />
           </Box>
           <Divider />
-          <List component="nav" className={classes.drawerList}>
+          {/* <List component="nav" className={classes.drawerList}>
             {drawerOptions.map(option => (
               <MenuItem button key={option.key} component={Link} to={option.route}>
                 {option.icon ? <ListItemIcon>{option.icon}</ListItemIcon> : <span />}
                 <ListItemText primary={option.display} />
               </MenuItem>
             ))}
-          </List>
-        </SwipeableDrawer>
-      </Hidden>
+          </List> }
+        </SwipeableDrawer> }
+      </Hidden> */}
       <MainContent viewWidth={viewSize}>
         {children}
       </MainContent>
