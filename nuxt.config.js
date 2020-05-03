@@ -1,7 +1,6 @@
 
 export default {
-  mode: 'universal',
-  buildDir: 'build',
+  mode: 'spa',
   /*
   ** Headers of the page
   */
