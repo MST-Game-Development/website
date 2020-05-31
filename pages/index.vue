@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <TitleBar/>
+  <div style="height: 150vh;">
+    <TitleBar />
     <div class="container">
       <div>
-        <logo />
+        <div style="height: 180px; width: 245px;">
+          <logo />
+        </div>
         <h1 class="title">
           MST-gamedev-website
         </h1>
@@ -37,7 +39,8 @@ import TitleBar from '~/components/header/TitleBar.vue'
 
 export default {
   components: {
-    Logo
+    Logo,
+    TitleBar
   }
 }
 </script>
